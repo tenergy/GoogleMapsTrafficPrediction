@@ -1,0 +1,78 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+
+  	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  	<script type="text/javascript">
+  		function submit1() {
+  			var roadid = $('#roadid').val();
+  			var direction = $('#direction').val();
+  			var day = $('#day').val();
+  			var time = $('#time').val();
+  			var status = $('#status').val();
+
+  			$.ajax({
+			   type: "GET",
+			   url: "ec2-35-167-176-101.us-west-2.compute.amazonaws.com:5000/train?roadid=" + roadid + "&direction=" + direction + "&day=" + day + "&time=" + time + "&status=" + status,
+			   success: function( data ) {
+			 	  alert(data);
+			   }
+			 });
+  		}
+  	</script>
+
+    <script type="text/javascript">
+  		function submit2() {
+  			var roadid = $('#roadid').val();
+  			var direction = $('#direction').val();
+  			var day = $('#day').val();
+  			var time = $('#time').val();
+
+  			$.ajax({
+			   type: "GET",
+			   url: "ec2-35-167-176-101.us-west-2.compute.amazonaws.com:5000/predict?roadid=" + roadid + "&direction=" + direction + "&day=" + day + "&time=" + time,
+			   success: function( data ) {
+			 	  alert(data);
+			   }
+			 });
+  		}
+  	</script>
+</head>
+<body>
+	<form action="/train">
+		<h3>TRAIN</h3>
+		roadid: <input id="roadid" class="form-control" type="text" name="roadid"><br>
+        direction: <input id="direction" class="form-control" type="text" name="direction"><br>
+	  	day: <input id="day" class="form-control" type="text" name="day"><br>
+        time: <input id="time" class="form-control" type="text" name="time"><br>
+        status: <input id="status" class="form-control" type="text" name="status"><br>
+	  	<button class="btn btn-default" onclick="submit1()">Train</button>
+    </form>
+    <form action="/predict">
+		<h3>PREDICT</h3>
+		roadid: <input id="roadid" class="form-control" type="text" name="roadid"><br>
+        direction: <input id="direction" class="form-control" type="text" name="direction"><br>
+	  	day: <input id="day" class="form-control" type="text" name="day"><br>
+        time: <input id="time" class="form-control" type="text" name="time"><br>
+	  	<button class="btn btn-default" onclick="submit2()">Predict</button>
+    </form>
+</body>
+</html>
